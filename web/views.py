@@ -1,7 +1,10 @@
 from django.http import HttpResponse, HttpResponsePermanentRedirect
 from django.shortcuts import render
 
-# Create your views here.
+def home(request):
+    return HttpResponse("Hello Kamal!")
+
+
 def redirect_good(request):
     return HttpResponsePermanentRedirect("/redirect_result/")
 
