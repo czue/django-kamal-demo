@@ -10,5 +10,6 @@ wheels/
 .venv
 
 # other stuff
+.env
 .kamal/secrets
 db.sqlite3
