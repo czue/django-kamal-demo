@@ -1,0 +1,62 @@
+service: lifeweeks
+
+image: czue/lifeweeks
+
+env:
+  # This is the minimal set of environment variables needed to run the app
+  # in production. You can add more here and in the .kamal/secrets file as needed.
+  clear:
+    DJANGO_SETTINGS_MODULE: kamal_demo.settings
+    ALLOWED_HOSTS: "lifeweeks.app"
+  secret:
+    - POSTGRES_PASSWORD
+    - SECRET_KEY
+    - DATABASE_URL
+    - REDIS_URL
+
+# https://kamal-deploy.org/docs/configuration#using-different-roles-for-servers
+servers:
+  web:
+    hosts:
+      - 5.161.204.158
+    options:
+      expose: "8000"
+
+# To use a non-root user see https://kamal-deploy.org/docs/configuration/ssh/#the-ssh-user
+# ssh:
+#   user: kamal
+
+# See https://kamal-deploy.org/docs/configuration/builders/ for config options
+builder:
+  arch: amd64
+  dockerfile: "Dockerfile.web"
+
+# See https://kamal-deploy.org/docs/configuration/docker-registry/ for config options
+registry:
+  server: 641498265050.dkr.ecr.us-east-1.amazonaws.com
+  username: AWS
+  password: <%= %x(aws ecr get-login-password) %>
+
+accessories:
+  # docker hostname will be "lifeweeks-postgres"
+  postgres:
+    image: postgres
+    host: 5.161.204.158
+    directories:
+      - data:/var/lib/postgresql/data
+    env:
+      clear:
+        POSTGRES_USER: lifeweeks
+        POSTGRES_DB: lifeweeks
+      secret:
+        - POSTGRES_PASSWORD
+  ## docker hostname will be "lifeweeks-redis"
+  redis:
+    image: redis
+    host: 5.161.204.158
+
+# See https://kamal-deploy.org/docs/configuration/proxy/ for config options
+proxy:
+  ssl: true
+  host: kamal-bug.saaspegasus.com
+  app_port: 8000
