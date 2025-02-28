@@ -1,18 +1,18 @@
-service: lifeweeks
+service: kamal-demo
 
-image: czue/lifeweeks
+image: czue/kamal-demo
 
 env:
   # This is the minimal set of environment variables needed to run the app
   # in production. You can add more here and in the .kamal/secrets file as needed.
   clear:
     DJANGO_SETTINGS_MODULE: kamal_demo.settings
-    ALLOWED_HOSTS: "lifeweeks.app"
+    ALLOWED_HOSTS: "kamal-bug.saaspegasus.com"
+    DEBUG: False
   secret:
     - POSTGRES_PASSWORD
     - SECRET_KEY
     - DATABASE_URL
-    - REDIS_URL
 
 # https://kamal-deploy.org/docs/configuration#using-different-roles-for-servers
 servers:
