@@ -145,7 +145,7 @@ LOGGING = {
         },
         'file': {
             'class': 'logging.FileHandler',
-            'filename': '/var/log/django.log',  # make sure this path is writable
+            'filename': '/code/django.log',  # make sure this path is writable
         },
     },
     'root': {

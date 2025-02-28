@@ -63,7 +63,6 @@ COPY --from=build-python --chown=django:django /code /code
 ENV PATH="/code/.venv/bin:$PATH"
 
 COPY --chown=django:django . /code
-RUN mkdir -p /var/log && chown django:django /var/log
 
 # why this has to be here:
 # https://stackoverflow.com/questions/59719175/where-to-run-collectstatic-when-deploying-django-app-to-heroku-using-docker
