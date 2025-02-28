@@ -8,4 +8,7 @@ wheels/
 
 # Virtual environments
 .venv
+
+# other stuff
 .kamal/secrets
+db.sqlite3
