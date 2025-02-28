@@ -64,6 +64,9 @@ ENV PATH="/code/.venv/bin:$PATH"
 
 COPY --chown=django:django . /code
 
+# Create log file and set permissions before collectstatic
+RUN touch /code/django.log && chown django:django /code/django.log
+
 # why this has to be here:
 # https://stackoverflow.com/questions/59719175/where-to-run-collectstatic-when-deploying-django-app-to-heroku-using-docker
 RUN DEBUG=False python /code/manage.py collectstatic --noinput --settings=kamal_demo.settings
