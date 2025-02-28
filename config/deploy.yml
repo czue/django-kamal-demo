@@ -38,7 +38,7 @@ registry:
   password: <%= %x(aws ecr get-login-password) %>
 
 accessories:
-  # docker hostname will be "lifeweeks-postgres"
+  # docker hostname will be "kamal-demo-postgres"
   postgres:
     image: postgres
     host: 5.161.204.158
@@ -46,14 +46,10 @@ accessories:
       - data:/var/lib/postgresql/data
     env:
       clear:
-        POSTGRES_USER: lifeweeks
-        POSTGRES_DB: lifeweeks
+        POSTGRES_USER: kamal_demo
+        POSTGRES_DB: kamal_demo
       secret:
         - POSTGRES_PASSWORD
-  ## docker hostname will be "lifeweeks-redis"
-  redis:
-    image: redis
-    host: 5.161.204.158
 
 # See https://kamal-deploy.org/docs/configuration/proxy/ for config options
 proxy:
